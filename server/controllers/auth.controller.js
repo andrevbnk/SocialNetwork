@@ -2,42 +2,49 @@ const config = require("../config/auth.config");
 const db = require("../models");
 const User = db.user;
 
+
 let jwt = require("jsonwebtoken");
 let bcrypt = require("bcryptjs");
 
 const signup = (req, res) => {
-  const user = new User({
-    username: req.body.username,
+  const datauser = new User({
     email: req.body.email,
     password: bcrypt.hashSync(req.body.password, 8)
   });
 
-  user.save((err, user) => {
-    if (err) {
-        next(err)
-    }
-    user.save(err => {
+  User.findOne({
+    email: req.body.email
+  })
+  .exec((err, user) => {
+      if (err) {
+            next(err)
+          }
+      if (user) {
+        return res.send({ message: "Пользователь уже зарегистрирован",status:false });
+      }
+      datauser.save((err, user) => {
         if (err) {
+          console.log(err);
             next(err)
         }
-
-        res.send({ message: "Пользователь зарегистрирован" });
+        return res.send({ message: "Пользователь зарегистрирован",status:true });
+        
       });
-  });
-};
+    });
+
+}
 
 const signin = (req, res) => {
   User.findOne({
-    username: req.body.username
+    email: req.body.email
   })
     .populate("group", "-__g")
     .exec((err, user) => {
         if (err) {
             next(err)
           }
-
       if (!user) {
-        return res.status(404).send({ message: "Пользователь не найден" });
+        return res.send({ message: "Пользователь не найден",status:false });
       }
 
       const passwordIsValid = bcrypt.compareSync(
@@ -46,13 +53,15 @@ const signin = (req, res) => {
       );
 
       if (!passwordIsValid) {
-        return res.status(401).send({
+        return res.send({
           accessToken: null,
-          message: "Проверьте пароль"
+          message: "Проверьте пароль",
+          status:false,
+          statusCode:"401",
         });
       }
 
-      var token = jwt.sign({ id: user.id }, config.secret, {
+      const token = jwt.sign({ id: user.id }, config.secret, {
         expiresIn: 86400 // 24 часа
       });
 

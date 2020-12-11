@@ -2,16 +2,16 @@ const db = require("../models");
 const User = db.user;
 
 const checkDuplic = (req, res, next) => {
-  User.findOne({//Проверка username
-    username: req.body.username
+  User.findOne({//Проверка email
+    email: req.body.email
   }).exec((err, user) => {
     if (err) {
-      res.status(500).send({ message: err });
+      res.send({ message: err,status:false,statusCode:"500" });
       return;
     }
 
     if (user) {
-      res.status(400).send({ message: "Такой пользователь уже зарегистрирована." });
+      res.send({ message: "Такой пользователь уже зарегистрирована.",status:false,statusCode:"400" });
       return;
     }
 
@@ -19,12 +19,12 @@ const checkDuplic = (req, res, next) => {
       email: req.body.email
     }).exec((err, user) => {
       if (err) {
-        res.status(500).send({ message: err });
+        res.send({ message: err,status:false,statusCode:"500" });
         return;
       }
 
       if (user) {
-        res.status(400).send({ message: "Такая почта уже зарегистрирована" });
+        res.send({ message: "Такая почта уже зарегистрирована",status:false,statusCode:"400" });
         return;
       }
 
