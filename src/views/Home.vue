@@ -8,11 +8,11 @@
 </template>
 
 <script>
-import Header from '../components/Header.vue'
-import Nav from '../components/Nav.vue'
-import Article from '../components/Article.vue'
-import Footer from '../components/Footer.vue'
-// @ is an alias to /src
+import Header from '@/components/Header.vue'
+import Nav from '@/components/Nav.vue'
+import Article from '@/components/Article.vue'
+import Footer from '@/components/Footer.vue'
+
 
 export default {
   name: 'Home',

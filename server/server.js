@@ -5,7 +5,7 @@ const cors = require("cors");
 
 const app = express();
 
-const PORT = process.env.PORT || 8080;
+const PORT = process.env.PORT || 3000;
 
 const dbConfig = require('./db.config');
 const db = require("./models");
@@ -24,7 +24,7 @@ db.mongoose
   });
 
 let corsOptions = {
-  origin: "http://localhost:8081"
+  origin: "http://localhost:8080"
 };
 
 
@@ -40,7 +40,7 @@ app.get("/", jsonParser,(req, res) => {
 });
 
 app.use((err, req, res, next) => {
-  console.log(err.stack)
+  console.log(err.stack,"err stack");
 
   res.status(500).json({error: err.stack})
 })
