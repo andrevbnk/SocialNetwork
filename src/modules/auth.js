@@ -1,6 +1,6 @@
 import axios from 'axios';
 import store from '@/store';
-
+import router from '@/router';
 const state = {
     user: null,
 };
@@ -8,6 +8,7 @@ const state = {
 const getters = {
     isAuthenticated: state => !!state.user,    
     StateUser: state => state.user,
+    userId: state => state.user.id,
 };
 const actions = {
     async SignUp({dispatch}, form) {
@@ -15,7 +16,6 @@ const actions = {
             let UserForm = {};
             UserForm.email = form.email;
             UserForm.password = form.password;
-            console.log(res);
             if(!res.data.status && res.data.statusCode){
                 return store.dispatch('ShowMessage',res.data.message);
             }
@@ -26,12 +26,13 @@ const actions = {
 
     async SignIn({commit}, User) {
         const res = await axios.post('/auth/sign-in', User);
+        console.log(res);
         if(!res.data.status && res.data.statusCode){
             return store.dispatch('ShowMessage',res.data.message);
         }
         await commit('setUser', res.data);
         axios.defaults.headers.common['x-access-token'] = res.data.accessToken;
-        // router.push('/');
+        router.push({ name: 'profile', params: { id: res.data.id }});
       },
       
     async LogOut({commit}){
@@ -39,12 +40,6 @@ const actions = {
         commit('LogOut', user)
     },
 
-    // async Test({commit}){
-    //     const all = await axios.get('test/all');
-    //     console.log(all);
-    //     const priv = await axios.get('test/user');
-    //     console.log(all);
-    // }
 };
 const mutations = {
     setUser(state, user){

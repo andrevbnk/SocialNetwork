@@ -9,6 +9,7 @@ export default new Vuex.Store({
   state: {
     message: null,
   },
+  
   mutations: {
     setMessage(state,message){
       state.message = message;
@@ -18,6 +19,7 @@ export default new Vuex.Store({
     ShowMessage({commit},message){
       commit('setMessage',message);
     },
+
   },
   modules: {
     auth

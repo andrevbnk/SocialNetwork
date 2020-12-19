@@ -3,28 +3,58 @@ import VueRouter from 'vue-router';
 import Home from '@/views/Home.vue';
 import Secure from '@/views/Secure.vue';
 import store from "../store";
+import UserProfile from '@/components/Profile/UserProfile.vue';
+import EditProfile from '@/components/Profile/EditProfile.vue';
+import Posts from '@/components/Posts.vue';
 
-
-Vue.use(VueRouter)
-
+Vue.use(VueRouter);
+ 
 const routes = [
   {
     path: '/',
     name: 'Home',
-    component: Home
+    component: Home,
+    children: [
+      {
+        path: 'profile/:id',
+        name:'profile',
+        component: UserProfile
+      },
+      {
+        path: 'posts/:id',
+        name:'posts',
+        component: Posts
+      }, 
+      {
+        path: 'edit',
+        name:'edit',
+        component: EditProfile,
+        meta: { requiresAuth: true },
+      },     
+      
+    ]
   },
   {
-    path: '/sign-up',
-    name: 'SignUp',
+    path: '/sign-form',
+    name: 'SignForm',
+    component: () => import('@/views/SignForm.vue'),
 
-    component: () => import(/* webpackChunkName: "about" */ '@/views/SignForm.vue')
-  },
+    children: [  
+      {
+        path: 'sign-up',
+        name: 'SignUp',
+        component: () => import(/* webpackChunkName: "about" */ '@/components/SignForm/SignUpForm.vue'),
+        meta: { isAuth: true },
+      },
+      {
+        path: 'sign-in',
+        name: 'SignIn',
 
-  {
-    path: '/sign-in',
-    name: 'SignIn',
-
-    component: () => import(/* webpackChunkName: "about" */ '@/views/SignForm.vue')
+        meta: { isAuth: true },
+        component: () => import(/* webpackChunkName: "about" */ '@/components/SignForm/SignInForm.vue'),
+      },
+      
+    ],
   },
   {
     path: '/secure',
@@ -46,10 +76,18 @@ router.beforeEach((to, from, next) => {
       next();
       return;
     }
-    next("/sign-in");
+    next("/sign-form/sign-in");
   } else {
     next();
   }
+
+  if (to.matched.some((record) => record.meta.isAuth)) {
+    if (store.getters.isAuthenticated) {
+      return router.push({name:'Home'}).catch(()=>{});
+    }
+    next();
+  }
+
 });
 
 export default router

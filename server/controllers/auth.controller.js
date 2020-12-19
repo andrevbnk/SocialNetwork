@@ -9,9 +9,11 @@ let bcrypt = require("bcryptjs");
 const signup = (req, res) => {
   const datauser = new User({
     email: req.body.email,
+    data:{
+      username: req.body.email.split("@")[0],
+    },
     password: bcrypt.hashSync(req.body.password, 8)
   });
-
   User.findOne({
     email: req.body.email
   })
@@ -44,7 +46,7 @@ const signin = (req, res) => {
             next(err)
           }
       if (!user) {
-        return res.send({ message: "Пользователь не найден",status:false });
+        return res.send({ message: "Пользователь не найден",status:false,statusCode:"400"});
       }
 
       const passwordIsValid = bcrypt.compareSync(
@@ -67,9 +69,9 @@ const signin = (req, res) => {
 
       res.status(200).send({
         id: user._id,
-        username: user.username,
-        email: user.email,
-        accessToken: token
+        username: user.data.username,
+        accessToken: token,
+        img: user.data.img,
       });
     });
 };

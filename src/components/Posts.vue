@@ -1,12 +1,11 @@
 <template>
-  <article id="article">
-    <router-view/>
-  </article>
+    <div class="posts">
+  {{$route.params.id}} - posts
+    </div>
 </template>
 
 <script>
 export default {
-  
 
 }
 </script>

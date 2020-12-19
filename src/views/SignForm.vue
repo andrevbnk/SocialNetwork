@@ -3,39 +3,27 @@
     <SignInfo />
 
     <div class="sign-form">
-        <template v-if="currentRouteName ===  'SignIn' ">
-            <SignInForm />
-        </template>
-
-        <template v-else-if='currentRouteName === "SignUp" '>
-            <SignUpForm />
-        </template>
+        <router-view/>
     </div>
     
   </div>
 </template>
 
 <script>
-import SignInForm from "@/components/SignForm/SignInForm";
-import SignUpForm from "@/components/SignForm/SignUpForm";
 import SignInfo from "@/components/SignForm/SingInfo";
 // @ is an alias to /src
 
 export default {
-  name: "SignIn",
-  data: ()=>{return{
+  name: "SignForm",
+  data: ()=>{
+    return{
 
   }},
   components: {
-    SignInForm,
-    SignUpForm,
+
     SignInfo,
   },
-  computed: {
-    currentRouteName() {
-        return this.$route.name;
-    }
-    }
+
 };
 </script>
 
