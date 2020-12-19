@@ -24,12 +24,12 @@ if (user) {
 axios.interceptors.response.use(undefined, function (error) {
   if (error) {
     const originalRequest = error.config;
-    if ((error.response.status === 401 || error.response.status === 404||error.response.status === 400) && !originalRequest._retry) {
+    if ((error.response.status === 401 ||error.response.status === 400) && !originalRequest._retry) {
         console.log(error.response,originalRequest,"error");
         originalRequest._retry = true;
         store.dispatch('ShowMessage',error.response.data.message);
         store.dispatch('LogOut');
-        return router.push('/sign-in');
+        return router.push('/sign-form/sign-in');
     }
     
   }

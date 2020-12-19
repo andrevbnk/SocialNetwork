@@ -22,13 +22,12 @@
           <div class="error" v-if="!$v.form.password.minLength && form.password">Пароль должен быть длинее {{ $v.form.password.$params.minLength.min }} символов.</div>
           <div class="error" v-if="!$v.form.email.email && form.email">Введите корректную почту</div>
 
-          <tree-view :data="$v" :options="{rootObjectKey: '$v', maxDepth: 2}"></tree-view>
         </div>
 
         <button type="button" @click="submit" :disabled="$v.form.$invalid" class="btn btn-dark mt-1">
           Войти
         </button>
-        <router-link to="/sign-up">Зарегистрироваться?</router-link>
+        <router-link :to="{name: 'SignUp'}">Зарегистрироваться?</router-link>
         
       </div>
 
@@ -78,7 +77,7 @@ export default {
 <style lang="scss" scopedSlots>
 @import "@/style/variables.scss";
 .sign-in-form {
-  background-color: $second-color;
+  background-color: $primary-color;
   border-radius: 10%;
   padding: 40px;
   width: 350px;

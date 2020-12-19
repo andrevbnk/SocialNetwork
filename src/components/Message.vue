@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="fixed-bottom global__message">
     <template v-if="Show">
       <div class="alert alert-danger">
         {{this.$store.state.message}}
@@ -31,3 +31,11 @@
     },
   }
 </script>
+<style lang="scss" scopedSlots>
+  .global__message{
+    width: 100%;
+  }
+  .alert{
+    margin:0px!important;
+  }
+</style>

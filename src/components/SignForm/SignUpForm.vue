@@ -26,13 +26,12 @@
           <div class="error" v-if="!$v.form.repeatPassword.sameAsPassword && form.repeatPassword">Пароли должны совпадать</div>
           <div class="error" v-if="!$v.form.email.email && form.email">Введите корректную почту</div>
 
-          <tree-view :data="$v" :options="{rootObjectKey: '$v', maxDepth: 2}"></tree-view>
         </div>
 
         <button type="button" @click="submit" :disabled="$v.form.$invalid" class="btn btn-dark mt-1">
           Зарегистрироваться
         </button>
-        <router-link to="/sign-in">Уже в системе?</router-link>
+        <router-link :to="{name: 'SignIn'}">Уже в системе?</router-link>
       </div>
       
     </div>
@@ -97,7 +96,7 @@ export default {
   flex-direction: column;
 }
 .sign-up-form {
-  background-color: $second-color;
+  background-color: $primary-color;
   border-radius: 10%;
   padding: 40px;
   width: 350px;

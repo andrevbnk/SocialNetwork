@@ -1,12 +1,11 @@
 <template>
-  <article id="article">
-    <router-view/>
-  </article>
+  <div class="profile">
+      profile
+  </div>
 </template>
 
 <script>
 export default {
-  
 
 }
 </script>

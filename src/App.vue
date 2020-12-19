@@ -1,7 +1,6 @@
 <template>
   <div id="app">
     <router-view/>
-    
     <Message/>
   </div>
 </template>
@@ -22,8 +21,10 @@ export default {
 @import '@/style/reset.scss';
 
 #app {
-  background-color: $primary-color;
+  background-color: $bg-color;
   font-family: $font-stack;
+
+
   color:$font-color;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -31,6 +32,9 @@ export default {
   label{
     margin-bottom: 0;
     margin-top:10px;
+  }
+  a{
+    cursor: pointer;
   }
 }
 
