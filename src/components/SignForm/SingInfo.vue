@@ -29,7 +29,7 @@ export default {
   gap: 4px;
   align-items: center;
   justify-items: center;
-  height: 100vh;
+
 
   .logo{
     -webkit-text-stroke: 0.9px #ffffff;

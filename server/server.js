@@ -13,7 +13,8 @@ const Group = db.Group;
 db.mongoose
   .connect(`mongodb://${dbConfig.HOST}:${dbConfig.PORT}/${dbConfig.DB}`, {
     useNewUrlParser: true,
-    useUnifiedTopology: true
+    useUnifiedTopology: true,
+    useCreateIndex: true,
   })
   .then(() => {
     console.log("Successfully connect to MongoDB.");

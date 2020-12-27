@@ -2,7 +2,7 @@
   <div class="profile">
     <template v-if="!status">
       {{ message }}
-      <!-- сделать нормально, добавить Loader -->
+      <!-- сделать нормально добавить Loader -->
     </template>
     <template v-else>
       <div class="profile__user">
@@ -13,11 +13,28 @@
              <router-link :to="{name: 'edit'}">Редактировать профиль</router-link>
           </div>
         </div>
+
         <div class="profile__info">
-          <span>Имя:{{ user.data.firstname }}</span>
-          <span>Фамилия:{{ user.data.lastName }}</span>
-          <span>Город:{{ user.data.location }}</span>
-          <span>Про себя:{{ user.data.about }}</span>
+          <div class="profile__info__fullName">
+            <h1> {{ user.data.username }}</h1>
+          </div>
+          <div class="profile__info__grid">
+            <div class="profile__info__headers">
+            <span>Имя:</span>
+            <span>Фамилия:</span>
+            <span>Город:</span>
+            <span>Про себя:</span>
+            </div>
+
+            <div class="profile__info__value">
+              <span>{{ user.data.firstName }}</span>
+              <span>{{ user.data.lastName }}</span>
+              <span>{{ user.data.location }}</span>
+              <span>{{ user.data.about }}</span>
+              
+            </div>
+          </div>
+
         </div>
       </div>
     </template>
@@ -72,9 +89,20 @@ export default {
   display: flex;
   flex-direction: column;
 }
+.profile__info__grid{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
 .profile__info {
-  display: flex;
-  flex-direction: column;
+}
+.profile__info__value{
+  display: grid;
+    text-align: start;
+}
+.profile__info__headers{
+    text-align: start;
+    display: grid;
+    padding-left: 60%;
 }
 .profile__logo__img {
   width: 150px;

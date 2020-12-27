@@ -1,8 +1,16 @@
 <template>
-  <nav id="nav" class="nav flex-column">
-    nav 
-          <router-link class="header_ava__link" :to="{ name: 'profile', params: { id: '12323' } }">asd</router-link>
-
+  <nav id="nav" class="nav flex-column dark-style">
+    <!-- nav 
+          <router-link class="header_ava__link" :to="{ name: 'profile', params: { id: '12323' } }">asd</router-link> -->
+    <div class="nav-item text-center">
+      asd
+    </div>
+    <div class="nav-item text-center">
+      asd
+    </div>
+    <div class="nav-item text-center">
+      asd
+    </div>
   </nav>
 </template>
 

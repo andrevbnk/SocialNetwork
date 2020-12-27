@@ -1,6 +1,8 @@
 <template>
   <article id="article">
+    <div class="dark-style">
     <router-view/>
+    </div>
   </article>
 </template>
 

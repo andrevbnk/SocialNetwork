@@ -4,9 +4,7 @@ let jwt = require("jsonwebtoken");
 const { user } = require("../models");
 
 const profile = (req, res)=>{
-  if (!req.params.id.match(/^[0-9a-fA-F]{24}$/)) {
-    return res.send({ message: "Введите корректный id пользователя",status:false });
-  }
+
   User.findById({
         _id: req.params.id
       })
@@ -23,9 +21,6 @@ const profile = (req, res)=>{
 };
 
 const editProfileInfo = (req,res)=>{
-  if (!req.body.id.match(/^[0-9a-fA-F]{24}$/)) {
-    return res.send({ message: "Введите корректный id пользователя",status:false });
-  }
 
   User.findById({
         _id: req.body.id
@@ -44,10 +39,10 @@ const editProfileInfo = (req,res)=>{
 
 
 const editProfileSaveInfo = (req,res)=>{
-  console.log(req.body,"post");
   const user = req.body.user;
   User.findByIdAndUpdate(req.body.id,{data:user}).exec((err,updUser)=>{
-    res.send({status:true});
+    console.log(updUser);
+    res.send({status:true, username:updUser.data.username});
   })
 };
 module.exports = {profile,editProfileInfo,editProfileSaveInfo};
