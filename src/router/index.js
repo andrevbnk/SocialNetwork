@@ -6,7 +6,7 @@ import store from "../store";
 import UserProfile from '@/components/Profile/UserProfile.vue';
 import EditProfile from '@/components/Profile/EditProfile.vue';
 import Posts from '@/components/Posts.vue';
-
+import AllUsers from '@/components/AllUsers';
 Vue.use(VueRouter);
  
 const routes = [
@@ -30,7 +30,12 @@ const routes = [
         name:'edit',
         component: EditProfile,
         meta: { requiresAuth: true },
-      },     
+      },
+      {
+        path:'',
+        name:'AllUsers',
+        component: AllUsers
+      }     
       
     ]
   },

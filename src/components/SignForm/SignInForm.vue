@@ -2,42 +2,63 @@
   <div class="sign-in-form">
     <form class="sign-in" @submit.prevent="submit">
       <h1>Войти в SocNet</h1>
-      
+
       <div class="form-input">
-
         <div>
-          <div class="form-group" :class="{ 'form-group--error': $v.form.password.$error }">
+          <div class="form-group">
             <label class="form__label">Email</label>
-            <input class="form__input border-0 rounded" placeholder="Email" v-model.trim="$v.form.email.$model"/>
+            <input
+              class="form-control form__input border-0 rounded"
+              placeholder="Email"
+              v-model.trim="$v.form.email.$model"
+              :class="{ 'is-invalid': $v.form.email.$error }"
+            />
+            <div class="error invalid-feedback" v-if="!$v.form.email.email && form.email">
+              Введите корректную почту
+            </div>
           </div>
 
-          <div class="form-group" :class="{ 'form-group--error': $v.form.password.$error }">
+          <div class="form-group">
             <label class="form__label">Password</label>
-            <input class="form__input border-0 rounded" placeholder="Пароль..." v-model.trim="$v.form.password.$model"/>
+            <input
+              class="form-control form__input border-0 rounded"
+              placeholder="Пароль..."
+              v-model.trim="$v.form.password.$model"
+              :class="{ 'is-invalid': $v.form.password.$error }"
+            />
+            <div
+              class="error invalid-feedback"
+              v-if="!$v.form.password.required && form.password"
+            >
+              Введите пароль.
+            </div>
+            <div
+              class="error invalid-feedback"
+              v-if="!$v.form.password.minLength && form.password"
+            >
+              Пароль должен быть длинее
+              {{ $v.form.password.$params.minLength.min }} символов.
+            </div>
           </div>
-
-
-
-          <div class="error" v-if="!$v.form.password.required && form.password">Введите пароль.</div>
-          <div class="error" v-if="!$v.form.password.minLength && form.password">Пароль должен быть длинее {{ $v.form.password.$params.minLength.min }} символов.</div>
-          <div class="error" v-if="!$v.form.email.email && form.email">Введите корректную почту</div>
-
         </div>
 
-        <button type="button" @click="submit" :disabled="$v.form.$invalid" class="btn btn-dark mt-1">
+        <button
+          type="button"
+          @click="submit"
+          :disabled="$v.form.$invalid"
+          class="btn btn-dark mt-1"
+        >
           Войти
         </button>
-        <router-link :to="{name: 'SignUp'}">Зарегистрироваться?</router-link>
-        
+        <router-link :to="{ name: 'SignUp' }">Зарегистрироваться?</router-link>
       </div>
-
     </form>
   </div>
 </template>
 
 <script>
 import { mapActions } from "vuex";
-import { required, minLength,email } from 'vuelidate/lib/validators';
+import { required, minLength, email } from "vuelidate/lib/validators";
 export default {
   name: "SignIn",
   components: {},
@@ -60,16 +81,16 @@ export default {
     },
   },
   validations: {
-    form:{
+    form: {
       email: {
         required,
         email,
       },
       password: {
         required,
-        minLength: minLength(3)
+        minLength: minLength(3),
       },
-    }
+    },
   },
 };
 </script>
@@ -86,7 +107,7 @@ export default {
   display: flex;
   flex-direction: column;
 }
-.form-group{
+.form-group {
   display: flex;
   flex-direction: column;
 }

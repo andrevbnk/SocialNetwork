@@ -30,7 +30,7 @@ const actions = {
         if(!res.data.status && res.data.statusCode){
             return store.dispatch('ShowMessage',res.data.message);
         }
-        await commit('setUser', res.data);
+        await commit('SetUser', res.data);
         axios.defaults.headers.common['x-access-token'] = res.data.accessToken;
         router.push({ name: 'profile', params: { id: res.data.id }});
       },
@@ -40,10 +40,17 @@ const actions = {
         commit('LogOut', user)
     },
 
+    async SetName({commit},username){
+        commit('SetName', username)
+    },
+
 };
 const mutations = {
-    setUser(state, user){
+    SetUser(state, user){
         state.user = user;
+    },
+    SetName(state,username){
+        state.user.username = username;
     },
     LogOut(state){
         state.user = null;
@@ -56,3 +63,4 @@ export default {
   actions,
   mutations
 };
+

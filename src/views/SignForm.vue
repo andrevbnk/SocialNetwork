@@ -30,8 +30,8 @@ export default {
 <style lang="scss">
 .sign-page {
   display: grid;
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  height: 100%;
   align-content: center;
 
   gap: 4px;

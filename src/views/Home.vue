@@ -36,14 +36,15 @@ export default {
   "footer footer footer";
   grid-template-columns: 0.5fr 1fr 1fr;
   grid-template-rows:0.35fr 1.5fr 0.2fr;
-  grid-gap: 0.5vw;
   margin: 0;
-  height: 100vh;
-  min-height: 150vh;
+  position: absolute;
+    height: 100%;
+    width: 100%;
 
   #nav{
     grid-area: nav;
     padding: 20px;
+    padding-top: 50px;
     background-color: $primary-color;
   }
   #footer{
@@ -53,12 +54,13 @@ export default {
   }
   #header{
     grid-area: header;
-    padding: 20px;
     background-color: $primary-color;
   }
   #article{
     grid-area: article;
     padding: 20px;
+    padding-top: 0;
+    padding-bottom: 0;
     background-color: $primary-color;
   }
 }
