@@ -15,6 +15,7 @@ module.exports = function(app) {
     res.set('Access-Control-Allow-Credentials', 'true');
     next();
   });
+  
   app.get('/api/profile/:id',jsonParser,controller.profile);
   app.post('/api/edit',jsonParser,[authJwt.verifyToken],controller.editProfileInfo);
   app.post('/api/editSave',jsonParser,[authJwt.verifyToken],controller.editProfileSaveInfo);

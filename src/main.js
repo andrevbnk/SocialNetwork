@@ -43,6 +43,35 @@ axios.defaults.baseURL = 'http://localhost:3000/api/';
 Vue.config.productionTip = false;
 
 
+
+function capitalize(value) {
+  if (!value) return ''
+  value = value.toString()
+  return value.charAt(0).toUpperCase() + value.slice(1)
+}
+
+Vue.filter('dateFormate',function(stringDate,key){
+  if(key=="birthday"||!key){
+    stringDate = new Date(stringDate);
+    let newDate = `${stringDate.getDay()} ${capitalize(
+      stringDate.toLocaleString("ru", {
+        month: "long",
+      })
+    )}
+    ${stringDate.getFullYear()}`;
+    return newDate;
+  }
+  else{
+    return stringDate;
+  }
+});
+
+Vue.filter('capitalize', function (value) {
+  return capitalize(value);
+})
+
+
+
 new Vue({
   router,
   store,

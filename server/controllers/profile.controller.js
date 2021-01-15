@@ -4,7 +4,6 @@ let jwt = require("jsonwebtoken");
 const { user } = require("../models");
 
 const profile = (req, res)=>{
-
   User.findById({
         _id: req.params.id
       })
@@ -23,7 +22,7 @@ const profile = (req, res)=>{
 const editProfileInfo = (req,res)=>{
 
   User.findById({
-        _id: req.body.id
+        _id: req.userId
       })
     .select("-password")
     .exec((err,user)=>{
@@ -40,9 +39,8 @@ const editProfileInfo = (req,res)=>{
 
 const editProfileSaveInfo = (req,res)=>{
   const user = req.body.user;
-  User.findByIdAndUpdate(req.body.id,{data:user}).exec((err,updUser)=>{
-    console.log(updUser);
-    res.send({status:true, username:updUser.data.username});
+  User.findByIdAndUpdate(req.userId,{data:user}).exec((err,updUser)=>{
+    res.send({status:true, username:user.username});
   })
 };
 module.exports = {profile,editProfileInfo,editProfileSaveInfo};

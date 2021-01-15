@@ -11,7 +11,6 @@ const validateEmail = function(email) {
 const User = mongoose.model(
   "User",
   new mongoose.Schema({
-    _id: {type: String,default: uuidv4() },
     email: {type:String,required: "Email нужнен для регистрации",trim: true,unique: true,
     validate: [validateEmail, 'Введите правильный email'],
     match: [/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, 'Введите правильный email']
