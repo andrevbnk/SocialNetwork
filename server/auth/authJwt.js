@@ -11,9 +11,6 @@ verifyToken = (req, res, next) => {
     if (err) {
       return res.status(401).send({ message: "Несанкционарованный доступ!",status:false });
     }
-    if(req.body.id !== decoded.id){
-      return res.send({message:"ID пользователя не совпадает с ID токена, попробуйте перезайти",status:false});
-    }
     req.userId = decoded.id;
     next();
   });

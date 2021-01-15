@@ -1,5 +1,5 @@
 <template>
-  <div class="sign-form-info">
+  <div>
     <div class="logo-info">
     
       <h1 class="logo">SocNet</h1>
@@ -23,13 +23,6 @@ export default {
 
 @import '@/style/variables.scss';
 
-.sign-form-info{
-  display: grid;
-  grid-auto-flow: column;
-  gap: 4px;
-  align-items: center;
-  justify-items: center;
-
 
   .logo{
     -webkit-text-stroke: 0.9px #ffffff;
@@ -40,6 +33,8 @@ export default {
     margin-bottom: 10px;
   
   }
+  .info{
+    text-align: start;
+  }
 
-}
 </style>

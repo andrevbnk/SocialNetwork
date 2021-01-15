@@ -75,7 +75,7 @@
                   {{ stateUser.username ? stateUser.username : stateUser.email }}
                 </button>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                  <a class="dropdown-item" href="#">Настройки</a>
+                  <router-link class="dropdown-item" to="/edit">Настройки</router-link>
                   <a class="dropdown-item" href="#">Изменить язык</a>
                   <a class="dropdown-item" @click="logout">Выйти</a>
                 </div>

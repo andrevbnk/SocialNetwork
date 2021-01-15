@@ -97,11 +97,17 @@ export default {
 
 <style lang="scss" scopedSlots>
 @import "@/style/variables.scss";
+@media (min-width: 1200px){
+  .sign-in-form{
+    width: 70%!important;
+  }
+}
 .sign-in-form {
   background-color: $primary-color;
   border-radius: 10%;
   padding: 40px;
-  width: 350px;
+      margin: 0 auto;
+  width: 100%;
 }
 .form-input {
   display: flex;

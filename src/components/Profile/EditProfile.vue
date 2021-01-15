@@ -152,7 +152,7 @@
               </div>
             </div>
 
-            
+
             <div class="tab-pane fade" id="account-change-password">
               <div class="card-body pb-2">
                 <div class="form-group">
@@ -192,7 +192,7 @@
                 </div>
                 <div class="form-group">
                   <label for="example-date-input" class="form-label">Дата рождения</label>
-                  <input class="form-control" type="date" v-model="user.birthday" />
+                  <input class="form-control" type="date" id="date" v-model="user.birthday" />
                 </div>
 
                 <div class="form-group">
@@ -200,7 +200,7 @@
                   <select class="custom-select" v-model="user.location">
                     <option>Россия</option>
                     <option selected="">Украина</option>
-                    <option>Немцы</option>
+                    <option>Германия</option>
                     <option>Франция</option>
                   </select>
                 </div>
@@ -271,7 +271,7 @@
             </div>
             <div class="tab-pane fade" id="account-notifications">
               <div class="card-body pb-2">
-                <h6 class="mb-4">Письма</h6>
+                <h6 class="mb-4">Письма(не работает)</h6>
 
                 <div class="form-group">
                   <label class="switcher">
@@ -394,6 +394,9 @@ export default {
 
           this.user = res.data.user.data;
           this.email = res.data.user.email;
+
+          let dataFormat = new Date(this.user.birthday).toISOString().substr(0, 10);
+          this.user.birthday = dataFormat;
           console.log(this.user);
         } else {
           return this.$store.dispatch("ShowMessage", res.data.message);
@@ -413,7 +416,6 @@ export default {
   },
   methods: {
     async submit() {
-      console.log(this.user);
       const res = await axios.post("/editSave", {
         id: this.$store.getters.userId,
         user: this.user,

@@ -24,18 +24,17 @@ export default {
   border:1px solid rgba(0, 0, 0,0.25);
   
 }
-
+html,body{
+  background-color: $bg-color!important;
+  margin: 0;
+  height: 100%;
+}
 #app {
-  background-color: $bg-color;
+  
   font-family: $font-stack;
   color: $font-color;
-  display: inline-block;
-  position: absolute;
-  height:100%;
-  width: 100%;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
   text-align: center;
+  height: 100%;
   label {
     margin-bottom: 0;
     margin-top: 10px;

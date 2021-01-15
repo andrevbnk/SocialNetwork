@@ -19,7 +19,7 @@ export default new Vuex.Store({
     ShowMessage({commit},message){
       commit('setMessage',message);
     },
-
+    
   },
   modules: {
     auth
