@@ -6,6 +6,7 @@ db.mongoose = mongoose;
 
 db.user = require("./user.model");
 db.group = require("./group.model");
+db.room =  require("./room.model");
 
 db.Group = ["Cat", "Dog", "Animals"];
 

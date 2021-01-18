@@ -397,7 +397,6 @@ export default {
 
           let dataFormat = new Date(this.user.birthday).toISOString().substr(0, 10);
           this.user.birthday = dataFormat;
-          console.log(this.user);
         } else {
           return this.$store.dispatch("ShowMessage", res.data.message);
         }

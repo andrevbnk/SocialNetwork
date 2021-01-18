@@ -15,6 +15,7 @@ const User = mongoose.model(
     validate: [validateEmail, 'Введите правильный email'],
     match: [/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, 'Введите правильный email']
     },
+    online: { type: Boolean, default: false },
     password: {type:String,required: "Пароль нужен для регистрации",trim: true,minlength: 3},
     data:{
       img:{type:String,default:"https://cdn3.iconfinder.com/data/icons/pixel-perfect-at-24px-volume-5/24/2097-512.png"},
@@ -49,6 +50,7 @@ const User = mongoose.model(
         {name:"Google+",url:"",defaultUrl:"https://www.googleplus.com/"},
       ]}
     },
+    room: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Room' }],
     Group: [
       {
         type: mongoose.Schema.Types.ObjectId,

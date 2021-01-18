@@ -5,21 +5,58 @@ import store from './store';
 import Vuelidate from 'vuelidate'
 import axios from 'axios';
 
+
 import 'bootstrap';
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap-vue/dist/bootstrap-vue.css';
 import { BootstrapVue, IconsPlugin } from 'bootstrap-vue';
 
-Vue.use(BootstrapVue);
-Vue.use(IconsPlugin);
-Vue.use(Vuelidate);
+import VueSocketIO from 'vue-socket.io';
+import io from 'socket.io-client';
+
+
 
 const user = store.state.auth.user;
 if (user) {
   if(user.accessToken){
     axios.defaults.headers.common['x-access-token'] = user.accessToken;
+    const socket = io('http://localhost:3000', {
+      transports: ['websocket'],
+      auth: {
+        token: user.accessToken,
+      },
+      transportOptions: {
+        polling: {
+          extraHeaders: {
+            'Authorization': user.accessToken,
+            'x-access-token': user.accessToken,
+          },
+        },
+      },
+    });
+
+
+    Vue.use(new VueSocketIO({
+      debug: false,
+      connection: socket,
+      vuex: {
+          store,
+          actionPrefix: 'SOCKET_',
+          mutationPrefix: 'SOCKET_'
+      },
+    }));
   }
 }
+
+
+
+
+Vue.use(BootstrapVue);
+Vue.use(IconsPlugin);
+Vue.use(Vuelidate);
+
+
+
 
 axios.interceptors.response.use(undefined, function (error) {
   if (error) {
@@ -31,7 +68,7 @@ axios.interceptors.response.use(undefined, function (error) {
         store.dispatch('LogOut');
         return router.push('/sign-form/sign-in');
     }
-    
+    console.log(error.response," - error");
   }
 });
 
