@@ -1,1 +1,1 @@
-# for_work
+# SocialNetwork stack - MEVN
