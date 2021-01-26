@@ -35,7 +35,6 @@ if (user) {
       },
     });
 
-
     Vue.use(new VueSocketIO({
       debug: false,
       connection: socket,
@@ -56,21 +55,30 @@ Vue.use(IconsPlugin);
 Vue.use(Vuelidate);
 
 
+axios.interceptors.response.use(
+  (config) => {
+  store.commit('hideLoader');
+  return config;
+  },
+  (error)=> {
+    if (error) {
+      const originalRequest = error.config;
+      if ((error.response.status === 401 ||error.response.status === 400) && !originalRequest._retry) {
+          console.log(error.response,originalRequest,"error");
+          originalRequest._retry = true;
 
+          this.$root.isLoading = false;
+          store.dispatch('ShowMessage',error.response.data.message);
+          store.dispatch('LogOut');
+          return router.push('/sign-form/sign-in');
+      }
+      console.log(error.response," - error");
 
-axios.interceptors.response.use(undefined, function (error) {
-  if (error) {
-    const originalRequest = error.config;
-    if ((error.response.status === 401 ||error.response.status === 400) && !originalRequest._retry) {
-        console.log(error.response,originalRequest,"error");
-        originalRequest._retry = true;
-        store.dispatch('ShowMessage',error.response.data.message);
-        store.dispatch('LogOut');
-        return router.push('/sign-form/sign-in');
+      store.commit('hideLoader');
+      return Promise.reject(error);
     }
-    console.log(error.response," - error");
-  }
-});
+  });
+
 
 
 axios.defaults.withCredentials = true;

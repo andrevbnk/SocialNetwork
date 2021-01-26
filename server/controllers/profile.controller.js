@@ -1,5 +1,6 @@
 const db = require("../models");
 const User = db.user;
+const Room = db.room;
 let jwt = require("jsonwebtoken");
 const { user } = require("../models");
 
@@ -43,4 +44,12 @@ const editProfileSaveInfo = (req,res)=>{
     res.send({status:true, username:user.username});
   })
 };
-module.exports = {profile,editProfileInfo,editProfileSaveInfo};
+
+const loadMessage = (req,res)=>{
+  const idProfile = req.params.idProfile;
+  Room.findOne({users:idProfile,users:req.userId}).exec((err,room)=>{
+    res.send({status:true, room:room});
+  });
+
+}
+module.exports = {profile,editProfileInfo,editProfileSaveInfo,loadMessage};

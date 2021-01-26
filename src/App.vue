@@ -2,22 +2,34 @@
   <div id="app">
     <router-view />
     <Message />
+    <Loader :isVisible="isLoading" />
   </div>
 </template>
 
 <script>
 import Message from "./components/Message.vue";
+import Loader from "./components/Loader.vue";
+import { mapGetters } from 'vuex';
 export default {
   name: "App",
-
+  data: () => {
+    return {
+    };
+  },
+  computed: {
+    ...mapGetters(['getLoading']),
+     isLoading: function(){
+       return this.getLoading;
+     },
+  },
   components: {
     Message,
+    Loader,
   },
-    sockets: {
+  sockets: {
     connect: function () {
       console.log("socket connected");
     },
-    
   },
 };
 </script>
@@ -29,6 +41,11 @@ export default {
   padding: 0.85rem 1.5rem;
   background: $primary-color !important;
   border: 1px solid rgba(0, 0, 0, 0.25);
+}
+.dark-less-style{
+  padding: 0.85rem 1.5rem;
+  background: $darkless !important;
+  border: 1px solid rgba(30, 30, 30, 0.25);
 }
 html,
 body {
@@ -46,7 +63,9 @@ body {
     margin-top: 10px;
   }
   a {
+    
     cursor: pointer;
   }
+
 }
 </style>

@@ -1,7 +1,5 @@
 <template>
-  <div v-if="!allUser">
-    Тут должен быть лоадер)
-  </div>
+  <div v-if="!allUser"></div>
   <div class="container bootstrap snippets bootdey" v-else>
     <div class="row">
       <h2 class="text-primary title">
@@ -17,17 +15,25 @@
         />
       </div>
       <div class="searchable-container">
-        <div class="items col-xs-12 col-sm-6 col-md-6 col-lg-6 clearfix" v-for="(user,key) in allUserFilter" :key="key">
+        <div
+          class="items col-xs-12 col-sm-6 col-md-6 col-lg-6 clearfix"
+          v-for="(user, key) in allUserFilter"
+          :key="key"
+        >
           <div class="info-block block-info clearfix">
             <div class="pull-left">
-             <router-link :to="'/profile/'+user._id"><img :src="user.data.img" alt="" class="square-box"></router-link> 
+              <router-link :to="'/profile/' + user._id"
+                ><img :src="user.data.img" alt="" class="square-box"
+              /></router-link>
             </div>
-            <h5 class="text-success pt-3">{{user.data.username}}</h5>
-            <h6>Email: {{user.email}}</h6>
-            <h6>Дата создания: <b>{{user.data.dataCreated |dateFormate }}</b></h6>
+            <h5 class="text-success pt-3">{{ user.data.username }}</h5>
+            <h6>Email: {{ user.email }}</h6>
+            <h6>
+              Дата создания: <b>{{ user.data.dataCreated | dateFormate }}</b>
+            </h6>
           </div>
         </div>
-          <div v-if="allUserFilter==false">Ничего не найдено,попробуйте ещё</div>
+        <div v-if="allUserFilter == false">Ничего не найдено,попробуйте ещё</div>
       </div>
     </div>
   </div>
@@ -35,29 +41,35 @@
 
 <script>
 import axios from "axios";
+import { mapMutations } from 'vuex';
 export default {
   data: () => {
     return {
-        allUser:false,
-        filter:"",
+      allUser: false,
+      filter: "",
     };
   },
   created() {
     this.axiosData();
   },
   methods: {
+    ...mapMutations(["showLoader"]),
     axiosData() {
+      this.showLoader();
       axios.get("/allUser").then((res) => {
         this.allUser = res.data.allUser;
       });
     },
   },
   computed: {
-    allUserFilter(){
-      let filterUser = this.allUser.filter((obj)=>obj.data.username==this.filter||obj.email==this.filter||!this.filter);
+    allUserFilter() {
+      let filterUser = this.allUser.filter(
+        (obj) =>
+          obj.data.username == this.filter || obj.email == this.filter || !this.filter
+      );
       console.log(filterUser);
-      return filterUser ;  
-    }
+      return filterUser;
+    },
   },
 };
 </script>

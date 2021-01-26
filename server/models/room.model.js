@@ -12,6 +12,7 @@ const Room = mongoose.model(
     _id: { type: UUID, default: uuidv4 },
     users: [{type:String}], 
     messages: [{
+        _id:{ type: UUID, default: uuidv4 },
         from:{type:String},
         body:{type:String},
         date:{ type: Date, default: Date.now },

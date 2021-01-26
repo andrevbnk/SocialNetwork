@@ -11,6 +11,7 @@ const PORT = process.env.PORT || 3000;
 const { authJwt } = require("./auth");
 const sendError = require('./errorSend');
 
+
 const server = app.listen(PORT, function() {
   console.log('server running on port '+PORT);
 });
@@ -45,9 +46,12 @@ io.on('connection', (socket) => {
     
     Room.findOneAndUpdate(
       {users:data.idProfile,users:socket.userId},
-      {message:{from:socket.userId,body:data.message}})
+      {
+        $push:{
+          messages:{from:socket.userId,body:data.message}
+        }
+      })
     .exec((err,room)=>{
-      console.log(room);
       if(!room){
         let newRoom = new Room({
           users:[],
@@ -55,7 +59,7 @@ io.on('connection', (socket) => {
         });
         newRoom.users.push(data.idProfile,socket.userId);
         newRoom.save((err,room)=>{
-          // console.log(room);
+          console.log(room);
         });
       }
       

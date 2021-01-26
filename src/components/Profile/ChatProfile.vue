@@ -45,41 +45,7 @@
                 </div>
               </div>
             </div>
-            <div class="conversation-item item-right clearfix">
-              <div class="conversation-user">
-                <img
-                  src="https://bootdey.com/img/Content/avatar/avatar1.png"
-                  class="img-responsive"
-                  alt=""
-                />
-              </div>
-              <div class="conversation-body">
-                <div class="name">Mila Kunis</div>
-                <div class="time hidden-xs">September 21, 2013 12:45</div>
-                <div class="text">
-                  Normally, both your asses would be dead as fucking fried chicken, but
-                  you happen to pull this shit while I'm in a transitional period so I
-                  don't wanna kill you, I wanna help you.
-                </div>
-              </div>
-            </div>
-            <div class="conversation-item item-left clearfix">
-              <div class="conversation-user">
-                <img
-                  src="https://bootdey.com/img/Content/avatar/avatar1.png"
-                  class="img-responsive"
-                  alt=""
-                />
-              </div>
-              <div class="conversation-body">
-                <div class="name">Ryan Gossling</div>
-                <div class="time hidden-xs">September 21, 2013 18:28</div>
-                <div class="text">
-                  I don't think they tried to market it to the billionaire, spelunking,
-                  base-jumping crowd.
-                </div>
-              </div>
-            </div>
+            <ChatMessage />
             <div class="conversation-item item-right clearfix">
               <div class="conversation-user">
                 <img
@@ -151,35 +117,47 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
-
+import { mapGetters } from "vuex";
+import ChatMessage from "./ChatMessage.vue";
+import axios from 'axios';
 export default {
-  props:{
-    idProfile:String 
+  props: {
+    idProfile: String,
   },
   data: () => {
     return {
-      messages: [],
       newMessage: null,
-      typing: false,
-      username: null,
-      ready: false,
-      info: [],
-      connections: 0,
+      room: null,
     };
   },
-
-  methods: {
-    ...mapGetters(['StateUser']),
-    send(){
-      this.$socket.emit('message',
-      {message:this.newMessage,token:this.StateUser().accessToken,idProfile:this.idProfile},
-      (data)=>{
-        console.log("Ok",data);
-      });
-    }
+  components: {
+    ChatMessage,
   },
-
+  methods: {
+    ...mapGetters(["StateUser"]),
+    send() {
+      this.$socket.emit(
+        "message",
+        {
+          message: this.newMessage,
+          token: this.StateUser().accessToken,
+          idProfile: this.idProfile,
+        },
+        (data) => {
+          console.log("Ok", data);
+        }
+      );
+    },
+    loadMessage() {
+      axios.get("/profile/loadMessage/"+this.idProfile).then((res) => {
+        this.room = res.data.room;
+        console.log(res);
+      });
+    },
+  },
+  created() {
+    this.loadMessage();
+  },
 };
 </script>
 

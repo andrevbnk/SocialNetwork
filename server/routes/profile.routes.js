@@ -5,6 +5,7 @@ const { authJwt } = require("../auth");
 
 module.exports = function(app) {  
   app.get('/api/profile/:id',jsonParser,controller.profile);
-  app.post('/api/edit',jsonParser,[authJwt.verifyToken],controller.editProfileInfo);
-  app.post('/api/editSave',jsonParser,[authJwt.verifyToken],controller.editProfileSaveInfo);
+  app.post('/api/profile/edit',jsonParser,[authJwt.verifyToken],controller.editProfileInfo);
+  app.post('/api/profile/editSave',jsonParser,[authJwt.verifyToken],controller.editProfileSaveInfo);
+  app.get('/api/profile/loadMessage/:idProfile',jsonParser,[authJwt.verifyToken],controller.loadMessage);
 };

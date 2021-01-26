@@ -1,8 +1,7 @@
 <template>
   <div class="profile">
     <template v-if="!status">
-      {{ message }}
-      <!-- сделать нормально добавить Loader -->
+      <!-- Сообщение какое-то, я ещё не придумал -->
     </template>
     <template v-else>
       <div class="container bootstrap snippets bootdeys">
@@ -348,7 +347,7 @@
                     <a href="#" class="btn btn-success pull-right">View all users</a>
                   </div>
 
-                  <ChatProfile :idProfile="user._id"/>
+                  <ChatProfile :idProfile="user._id" />
                 </div>
               </div>
             </div>
@@ -362,6 +361,7 @@
 <script>
 import axios from "axios";
 import ChatProfile from "./ChatProfile";
+import { mapMutations } from "vuex";
 
 export default {
   data: () => {
@@ -393,7 +393,9 @@ export default {
     this.axiosData();
   },
   methods: {
+    ...mapMutations(["showLoader"]),
     axiosData() {
+      this.showLoader();
       axios
         .get("/profile/" + this.$route.params.id)
         .then((res) => {

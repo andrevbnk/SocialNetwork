@@ -1,7 +1,6 @@
 <template>
   <div v-if="!show">
-    <span>Что-то сломалось,перезайдите</span
-    ><!-- ТУТ должен быть лоадер, а то как-то по-лоховски получается -->
+    <!-- Сообщение -->
   </div>
   <div class="container flex-grow-1 container-p-y" v-else>
     <h4 class="font-weight-bold py-3 mb-4">Настройки аккаунта</h4>
@@ -152,7 +151,6 @@
               </div>
             </div>
 
-
             <div class="tab-pane fade" id="account-change-password">
               <div class="card-body pb-2">
                 <div class="form-group">
@@ -192,7 +190,12 @@
                 </div>
                 <div class="form-group">
                   <label for="example-date-input" class="form-label">Дата рождения</label>
-                  <input class="form-control" type="date" id="date" v-model="user.birthday" />
+                  <input
+                    class="form-control"
+                    type="date"
+                    id="date"
+                    v-model="user.birthday"
+                  />
                 </div>
 
                 <div class="form-group">
@@ -224,9 +227,7 @@
                   <label class="form-label" :for="soc.name">{{ soc.name }}</label>
                   <div class="input-group mb-3">
                     <div class="input-group-prepend">
-                      <span class="input-group-text">{{
-                        soc.defaultUrl
-                      }}</span>
+                      <span class="input-group-text">{{ soc.defaultUrl }}</span>
                     </div>
                     <input
                       type="text"
@@ -304,7 +305,9 @@
                       <span class="switcher-yes"></span>
                       <span class="switcher-no"></span>
                     </span>
-                    <span class="switcher-label">Присылать письмо когда вас добавили/подписались </span>
+                    <span class="switcher-label"
+                      >Присылать письмо когда вас добавили/подписались
+                    </span>
                   </label>
                 </div>
               </div>
@@ -366,6 +369,7 @@
 <script>
 import axios from "axios";
 import { required, minLength, maxLength } from "vuelidate/lib/validators";
+import {mapMutations } from 'vuex';
 
 export default {
   data: () => {
@@ -387,7 +391,7 @@ export default {
   },
   created() {
     axios
-      .post("/edit", { id: this.$store.getters.userId })
+      .post("/profile/edit", { id: this.$store.getters.userId })
       .then((res) => {
         if (res.data.status) {
           this.show = true;
@@ -414,8 +418,10 @@ export default {
     },
   },
   methods: {
+    ...mapMutations(["showLoader"]),
     async submit() {
-      const res = await axios.post("/editSave", {
+      this.showLoader();
+      const res = await axios.post("/profile/editSave", {
         id: this.$store.getters.userId,
         user: this.user,
       });
