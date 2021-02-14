@@ -7,3 +7,12 @@
 - Express
 - V(socket.io-client,bootstrap,Scss,Vuex,vue-cli,vue-route,vuex-persistedstate)
 - N(jsonwebtoken,socket.io,cors)
+
+```
+npm install 
+npm run serve
+
+cd server
+node server.js 
+
+```
