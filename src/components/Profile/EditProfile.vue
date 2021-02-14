@@ -62,7 +62,7 @@
                     <input type="file" class="account-settings-fileinput" />
                   </label>
                   &nbsp;
-                  <button type="button" class="btn btn-default md-btn-flat">
+                  <button type="button" class="btn btn-outline-secondary md-btn-flat">
                     Сбросить
                   </button>
 
@@ -361,7 +361,7 @@
       >
         Сохранить</button
       >&nbsp;
-      <button type="button" class="btn btn-default">Отменить</button>
+      <!-- <button type="button" class="btn btn-default">Отменить</button> -->
     </div>
   </div>
 </template>
@@ -427,15 +427,15 @@ export default {
       });
       console.log(res);
       if (res.data.status) {
-        //  this.$router.push("/edit");
         this.$store.dispatch("SetName", res.data.username);
+        this.$router.go();
       }
     },
   },
 };
 </script>
 
-<style lang="scss" scopedSlots>
+<style lang="scss" scoped>
 @import "@/style/variables.scss";
 .edit__radio {
   margin-right: 10px;

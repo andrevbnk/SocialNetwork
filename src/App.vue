@@ -9,18 +9,17 @@
 <script>
 import Message from "./components/Message.vue";
 import Loader from "./components/Loader.vue";
-import { mapGetters } from 'vuex';
+import { mapGetters } from "vuex";
 export default {
   name: "App",
   data: () => {
-    return {
-    };
+    return {};
   },
   computed: {
-    ...mapGetters(['getLoading']),
-     isLoading: function(){
-       return this.getLoading;
-     },
+    ...mapGetters(["getLoading"]),
+    isLoading: function () {
+      return this.getLoading;
+    },
   },
   components: {
     Message,
@@ -37,16 +36,19 @@ export default {
 <style lang="scss">
 @import "@/style/variables.scss";
 @import "@/style/reset.scss";
-.dark-style {
-  padding: 0.85rem 1.5rem;
+.dark {
   background: $primary-color !important;
   border: 1px solid rgba(0, 0, 0, 0.25);
-}
-.dark-less-style{
+  &-less{
+    background: $darkless !important;
+    border: 1px solid rgba(30, 30, 30, 0.25);
+  }
+  &-padding{
   padding: 0.85rem 1.5rem;
-  background: $darkless !important;
-  border: 1px solid rgba(30, 30, 30, 0.25);
+
+  }
 }
+
 html,
 body {
   background-color: $bg-color !important;
@@ -63,7 +65,6 @@ body {
     margin-top: 10px;
   }
   a {
-    
     cursor: pointer;
   }
 

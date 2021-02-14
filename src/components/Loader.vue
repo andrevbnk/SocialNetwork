@@ -1,7 +1,6 @@
 <template>
   <div v-if="isVisible" class="loader-overlay">
-    <div class="loaderAnim"></div>
-    <span class="text" v-html="text"></span>
+    <div class="lds-dual-ring"></div>
   </div>
 </template>
 
@@ -12,13 +11,11 @@ export default {
     isVisible: { type: Boolean, required: true, default: false },
     text: { type: String, required: false, default: "" },
   },
-  computed:{
-      
-  }
+  computed: {},
 };
 </script>
 
-<style lang="scss" scopedSlots>
+<style lang="scss" scoped>
 .loader-overlay {
   position: fixed;
   width: 100%;
@@ -30,51 +27,30 @@ export default {
   background-color: rgba(0, 0, 0, 0.7);
   z-index: 999;
   cursor: pointer;
-  span.text {
+  .lds-dual-ring {
     display: inline-block;
     position: relative;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    color: #fff;
-  }
-  .loaderAnim {
-    animation: loader-animate 1.5s linear infinite;
-    clip: rect(0, 80px, 80px, 40px);
-    height: 80px;
+    top:40%;
     width: 80px;
-    position: absolute;
-    left: calc(50% - 40px);
-    top: calc(50% - 40px);
-    &:after {
-      animation: loader-animate-after 1.5s ease-in-out infinite;
-      clip: rect(0, 80px, 80px, 40px);
-      content: "";
-      border-radius: 50%;
-      height: 80px;
-      width: 80px;
-      position: absolute;
-    }
+    height: 80px;
   }
-  @keyframes loader-animate {
+  .lds-dual-ring:after {
+    content: " ";
+    display: block;
+    width: 64px;
+    height: 64px;
+    margin: 8px;
+    border-radius: 50%;
+    border: 6px solid #fff;
+    border-color: #fff transparent #fff transparent;
+    animation: lds-dual-ring 1.2s linear infinite;
+  }
+  @keyframes lds-dual-ring {
     0% {
       transform: rotate(0deg);
     }
     100% {
-      transform: rotate(220deg);
-    }
-  }
-  @keyframes loader-animate-after {
-    0% {
-      box-shadow: inset #fff 0 0 0 17px;
-      transform: rotate(-140deg);
-    }
-    50% {
-      box-shadow: inset #fff 0 0 0 2px;
-    }
-    100% {
-      box-shadow: inset #fff 0 0 0 17px;
-      transform: rotate(140deg);
+      transform: rotate(360deg);
     }
   }
 }

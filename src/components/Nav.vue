@@ -1,8 +1,8 @@
 <template>
   <nav id="nav" class="nav flex-column dark-style">    
-    <ul class="nav list-group">
-      <li class="list-group-item list-group-item-action dark-less-style"><router-link to="/secure" class="link-nav"> Secure</router-link></li>
-      <li class="list-group-item list-group-item-action dark-less-style"> <router-link :to="{name: 'AllUsers'}" class="link-nav"> Home</router-link></li>
+    <ul class="nav list-group border border-dark border-top-0 border-bottom-0">
+      <li class="list-group-item list-group-item-action dark dark-less"><router-link to="/secure" class="link-nav"> Secure</router-link></li>
+      <li class="list-group-item list-group-item-action darl dark-less"> <router-link :to="{name: 'AllUsers'}" class="link-nav"> Home</router-link></li>
     </ul>
   </nav>
 </template>

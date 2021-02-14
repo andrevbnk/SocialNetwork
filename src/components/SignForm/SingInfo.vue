@@ -15,7 +15,7 @@ export default {
 }
 </script>
 
-<style lang="scss" scopedSlots>
+<style lang="scss" scoped scopedSlots>
 
 @import '@/style/variables.scss';
 

@@ -41,7 +41,6 @@
 
 <script>
 import axios from "axios";
-import { mapMutations } from 'vuex';
 export default {
   data: () => {
     return {
@@ -53,9 +52,7 @@ export default {
     this.axiosData();
   },
   methods: {
-    ...mapMutations(["showLoader"]),
     axiosData() {
-      this.showLoader();
       axios.get("/allUser").then((res) => {
         this.allUser = res.data.allUser;
       });
@@ -67,14 +64,13 @@ export default {
         (obj) =>
           obj.data.username == this.filter || obj.email == this.filter || !this.filter
       );
-      console.log(filterUser);
       return filterUser;
     },
   },
 };
 </script>
 
-<style lang="scss" scopedSlots>
+<style lang="scss" scoped>
 .title {
   margin-left: 20px;
 }

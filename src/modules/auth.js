@@ -8,7 +8,7 @@ const state = {
 const getters = {
     isAuthenticated: state => !!state.user,    
     StateUser: state => state.user,
-    userId: state => state.user.id,
+    userId: state => state.user?.id,
 };
 const actions = {
     async SignUp({dispatch}, form) {

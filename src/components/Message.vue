@@ -31,7 +31,7 @@
     },
   }
 </script>
-<style lang="scss" scopedSlots>
+<style lang="scss" scoped scopedSlots>
   .global__message{
     width: 100%;
   }

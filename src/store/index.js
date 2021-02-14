@@ -13,7 +13,7 @@ const authState = createPersistedState({
 export default new Vuex.Store({
   state: {
     message: null,
-    isLoading: true,
+    isLoading: false,
   },
   getters:{
     getLoading:(state)=>state.isLoading,

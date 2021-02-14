@@ -1,5 +1,8 @@
 <template>
-  <h1 @click="axios_test">SEcure</h1>
+<div class="secure">
+  <h1 @click="axios_test">Secure (тестирование общих/приватных запросов)</h1>
+  <h6>Если открыть консоль разраб. и кликнуть по Secure посылается два запроса, один доступен всем, для другого нужнен валидный JWT </h6>
+</div>
 </template>
 
 <script>
