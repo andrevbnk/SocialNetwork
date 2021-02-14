@@ -43,4 +43,12 @@ const editProfileSaveInfo = (req,res)=>{
     res.send({status:true, username:user.username});
   })
 };
-module.exports = {profile,editProfileInfo,editProfileSaveInfo};
+
+const loadMessage = (req,res)=>{
+  const idProfile = req.params.idProfile;
+  User.findById(idProfile).exec((err,user)=>{
+    res.send({status:true, messages:user.data.messages});
+  });
+
+}
+module.exports = {profile,editProfileInfo,editProfileSaveInfo,loadMessage};

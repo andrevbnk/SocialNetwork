@@ -19,10 +19,11 @@
           </div>
 
           <div class="form-group">
-            <label class="form__label">Password</label>
+            <label class="form__label">Пароль</label>
             <input
               class="form-control form__input border-0 rounded"
               placeholder="Пароль..."
+              type="password"
               v-model.trim="$v.form.password.$model"
               :class="{ 'is-invalid': $v.form.password.$error }"
             />

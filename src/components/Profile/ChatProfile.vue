@@ -1,103 +1,19 @@
 <template>
-  <div class="tab-pane fade" id="tab-chat">
+  <div class="tab-pane fade" id="chat" role="tabpanel" aria-labelledby="chat-tab" >
     <div class="conversation-wrapper">
       <div class="conversation-content">
         <div
           class="slimScrollDiv"
-          style="position: relative; overflow: hidden; width: auto; height: 340px"
+          style="position: relative; overflow: auto; width: auto; height: 340px"
         >
           <div
             class="conversation-inner"
-            style="overflow: hidden; width: auto; height: 340px"
+            style="overflow: auto; width: auto; height: 340px"
           >
-            <div class="conversation-item item-left clearfix">
-              <div class="conversation-user">
-                <img
-                  src="https://bootdey.com/img/Content/avatar/avatar1.png"
-                  class="img-responsive"
-                  alt=""
-                />
-              </div>
-              <div class="conversation-body">
-                <div class="name">Ryan Gossling</div>
-                <div class="time hidden-xs">September 21, 2013 18:28</div>
-                <div class="text">
-                  I don't think they tried to market it to the billionaire, spelunking,
-                  base-jumping crowd.
-                </div>
-              </div>
+            <div class="allMessages" v-for='message in messages' :key="message.id">
+              <ChatMessage :message="message" />
             </div>
-            <div class="conversation-item item-right clearfix">
-              <div class="conversation-user">
-                <img
-                  src="https://bootdey.com/img/Content/avatar/avatar1.png"
-                  class="img-responsive"
-                  alt=""
-                />
-              </div>
-              <div class="conversation-body">
-                <div class="name">Mila Kunis</div>
-                <div class="time hidden-xs">September 21, 2013 12:45</div>
-                <div class="text">
-                  Normally, both your asses would be dead as fucking fried chicken, but
-                  you happen to pull this shit while I'm in a transitional period so I
-                  don't wanna kill you, I wanna help you.
-                </div>
-              </div>
-            </div>
-            <div class="conversation-item item-right clearfix">
-              <div class="conversation-user">
-                <img
-                  src="https://bootdey.com/img/Content/avatar/avatar1.png"
-                  class="img-responsive"
-                  alt=""
-                />
-              </div>
-              <div class="conversation-body">
-                <div class="name">Mila Kunis</div>
-                <div class="time hidden-xs">September 21, 2013 12:45</div>
-                <div class="text">
-                  Normally, both your asses would be dead as fucking fried chicken, but
-                  you happen to pull this shit while I'm in a transitional period so I
-                  don't wanna kill you, I wanna help you.
-                </div>
-              </div>
-            </div>
-            <div class="conversation-item item-left clearfix">
-              <div class="conversation-user">
-                <img
-                  src="https://bootdey.com/img/Content/avatar/avatar1.png"
-                  class="img-responsive"
-                  alt=""
-                />
-              </div>
-              <div class="conversation-body">
-                <div class="name">Ryan Gossling</div>
-                <div class="time hidden-xs">September 21, 2013 18:28</div>
-                <div class="text">
-                  I don't think they tried to market it to the billionaire, spelunking,
-                  base-jumping crowd.
-                </div>
-              </div>
-            </div>
-            <div class="conversation-item item-right clearfix">
-              <div class="conversation-user">
-                <img
-                  src="https://bootdey.com/img/Content/avatar/avatar1.png"
-                  class="img-responsive"
-                  alt=""
-                />
-              </div>
-              <div class="conversation-body">
-                <div class="name">Mila Kunis</div>
-                <div class="time hidden-xs">September 21, 2013 12:45</div>
-                <div class="text">
-                  Normally, both your asses would be dead as fucking fried chicken, but
-                  you happen to pull this shit while I'm in a transitional period so I
-                  don't wanna kill you, I wanna help you.
-                </div>
-              </div>
-            </div>
+
           </div>
           <div
             class="slimScrollBar"
@@ -151,36 +67,73 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
-
+import { mapGetters } from "vuex";
+import ChatMessage from "./ChatMessage.vue";
+import axios from "axios";
 export default {
-  props:{
-    idProfile:String 
+  props: {
+    idProfile: String,
   },
   data: () => {
     return {
-      messages: [],
       newMessage: null,
-      typing: false,
-      username: null,
-      ready: false,
-      info: [],
-      connections: 0,
+      messages: null,
     };
   },
-
-  methods: {
-    ...mapGetters(['StateUser']),
-    send(){
-      this.$socket.emit('message',
-      {message:this.newMessage,token:this.StateUser().accessToken,idProfile:this.idProfile},
-      (data)=>{
-        console.log("Ok",data);
-      });
-    }
+  components: {
+    ChatMessage,
   },
-
+  methods: {
+    ...mapGetters(["StateUser"]),
+    // downScroll(){
+    //     this.$nextTick(() => {
+    //         this.$refs.toolbarChat.scrollTop = 0;
+    //     });
+    // },
+    send() {
+      this.$socket.emit(
+        "message",
+        {
+          message: this.newMessage,
+          token: this.StateUser().accessToken,
+          idProfile: this.idProfile,
+        },
+        (data) => {
+          this.messages = data?data.messages:null;
+          console.log(this.messages);
+        }
+      );
+      // this.downScroll();
+    },
+    loadMessage() {
+        //  this.downScroll();
+      axios.get("/profile/loadMessage/" + this.idProfile).then((res) => {
+        this.messages = res.data.messages;
+      });
+    },
+  },
+  created() {
+    this.loadMessage();
+  },
 };
 </script>
 
-<style></style>
+<style lang="scss" scoped>
+@import "@/style/variables.scss";
+.conversation-new-message {
+  padding-top: 10px;
+}
+
+textarea.form-control {
+  height: auto;
+}
+.form-control {
+  border-radius: 0px;
+  border-color: #e1e1e1;
+  box-shadow: none;
+  -webkit-box-shadow: none;
+}
+
+
+
+</style>

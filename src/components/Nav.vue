@@ -1,16 +1,9 @@
 <template>
-  <nav id="nav" class="nav flex-column dark-style">
-    <!-- nav 
-          <router-link class="header_ava__link" :to="{ name: 'profile', params: { id: '12323' } }">asd</router-link> -->
-    <div class="nav-item text-center">
-      zxc
-    </div>
-    <div class="nav-item text-center">
-      asd
-    </div>
-    <div class="nav-item text-center">
-      oooo
-    </div>
+  <nav id="nav" class="nav flex-column dark-style">    
+    <ul class="nav list-group border border-dark border-top-0 border-bottom-0">
+      <li class="list-group-item list-group-item-action dark dark-less"><router-link to="/secure" class="link-nav"> Secure</router-link></li>
+      <li class="list-group-item list-group-item-action darl dark-less"> <router-link :to="{name: 'AllUsers'}" class="link-nav"> Home</router-link></li>
+    </ul>
   </nav>
 </template>
 
@@ -33,4 +26,12 @@ export default {
 };
 </script>
 
-<style></style>
+<style scopedSlots>
+.link-nav{
+  color:#afafaf;
+}
+.link-nav:hover{
+  color: #ffffff;
+  text-decoration-line: none;
+}
+</style>

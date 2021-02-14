@@ -125,7 +125,7 @@ export default {
 };
 </script>
 
-<style lang="scss" scopedSlots>
+<style lang="scss" scoped>
 @import "@/style/variables.scss";
 .header__ava__img {
   width: 80px;

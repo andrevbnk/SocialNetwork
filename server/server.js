@@ -11,14 +11,14 @@ const PORT = process.env.PORT || 3000;
 const { authJwt } = require("./auth");
 const sendError = require('./errorSend');
 
+
 const server = app.listen(PORT, function() {
   console.log('server running on port '+PORT);
 });
 
 const dbConfig = require('./db.config');
 const db = require("./models");
-const Room = db.room;
-const Group = db.Group;
+const User = db.user;
 
 const io = require('socket.io')(server,{
   cors: {
@@ -29,41 +29,40 @@ const io = require('socket.io')(server,{
 });
 
 io.use( (socket,next)=>{
-  const token = authJwt.isValidJwt(socket.handshake.auth.token);
+  const token = socket.handshake.auth.token;
   if (token) {
-    console.log(token.id);
-    socket.userId = token.id;
-    return next();
+    if(authJwt.isValidJwt(token)){
+      socket.userId = token.id;
+      return next();
+    }
   }
-  return next(new Error('Authentication error'));
+  return next();
 });
 
 io.on('connection', (socket) => {
   console.log('connected socket!');
-  
+
   socket.on('message',(data,cb)=>{
-    
-    Room.findOneAndUpdate(
-      {users:data.idProfile,users:socket.userId},
-      {message:{from:socket.userId,body:data.message}})
-    .exec((err,room)=>{
-      console.log(room);
-      if(!room){
-        let newRoom = new Room({
-          users:[],
-          messages:{from:socket.userId,body:data.message},
-        });
-        newRoom.users.push(data.idProfile,socket.userId);
-        newRoom.save((err,room)=>{
-          // console.log(room);
-        });
+    User.findByIdAndUpdate(
+      data.idProfile,
+      {
+        $push:{
+          'data.messages':{message:data.message,side:true,date:new Date(Date.now())}
+        }
+      },{new: true})
+    .exec((err,user)=>{
+      if(err){
+        throw new Error("User findByIdAndUpdate Error",err);
+      }
+      if(user){
+        console.log(user);
+        socket.user = user.data;
+        return cb(socket.user);
       }
       
     });
-
-    cb(socket.id);
     
-    return data;
+    return false;
   });
 
 });

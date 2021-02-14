@@ -20,11 +20,12 @@
           </div>
 
           <div class="form-group">
-            <label class="form__label">Password</label>
+            <label class="form__label">Пароль</label>
             <input
               class="form-control form__input border-0 rounded"
               placeholder="Пароль..."
               v-model.trim="$v.form.password.$model"
+              type="password"
               :class="{ 'is-invalid': $v.form.password.$error }"
             />
             <div
@@ -43,10 +44,11 @@
           </div>
 
           <div class="form-group">
-            <label class="form__label">Repeat password</label>
+            <label class="form__label">Повторный пароль</label>
             <input
               class="form-control form__input border-0 rounded"
               placeholder="Повторный пароль..."
+              type="password"
               v-model.trim="$v.form.repeatPassword.$model"
               :class="{ 'is-invalid': $v.form.repeatPassword.$error }"
             />
@@ -121,7 +123,7 @@ export default {
 };
 </script>
 
-<style lang="scss" scopedSlots>
+<style lang="scss" scoped scopedSlots>
 @import "@/style/variables.scss";
 @media (min-width: 1200px){
   .sign-up-form{

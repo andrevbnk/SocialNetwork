@@ -1,5 +1,5 @@
 <template>
-  <footer id="footer">footer</footer>
+  <footer id="footer">&#9785;</footer>
 </template>
 
 <script>

@@ -64,4 +64,17 @@ export default {
     background-color: $primary-color;
   }
 }
+  @media (max-width: 568px) {
+    .home{
+    display:grid;
+    grid-template-areas:
+    "header header header"
+    "article article article"
+    "footer footer footer";
+    grid-template-columns: 1fr 1fr 1fr;
+    #nav{
+      display: none;
+    }
+    }
+  }
 </style>
