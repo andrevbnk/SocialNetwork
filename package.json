@@ -7,7 +7,7 @@
     "build": "vue-cli-service build",
     "test:unit": "vue-cli-service test:unit",
     "lint": "vue-cli-service lint",
-    "start": "vue-cli-service serve && nodemon server/server.js "
+    "start": "vue-cli-service serve && node server/server.js "
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.32",
@@ -46,13 +46,13 @@
     "@vue/cli-plugin-vuex": "~4.5.0",
     "@vue/cli-service": "~4.5.0",
     "@vue/test-utils": "^1.0.3",
-    "vue-template-compiler": "^2.6.11"
-  },
-  "devDependencies": {
+    "vue-template-compiler": "^2.6.11",
     "babel-eslint": "^10.1.0",
     "eslint": "^6.7.2",
     "eslint-plugin-vue": "^6.2.2",
     "sass": "^1.26.5",
     "sass-loader": "^8.0.2"
+  },
+  "devDependencies": {
   }
 }
