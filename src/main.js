@@ -66,10 +66,10 @@ axios.interceptors.response.use(
 
           store.dispatch('ShowMessage',error.response.data.message);
           store.dispatch('LogOut');
-          return router.push('/sign-form/sign-in');
+          router.push('/sign-form/sign-in');
       }
       console.log(error.response," - error");
-
+      
       store.commit('hideLoader');
       return Promise.reject(error);
     }
