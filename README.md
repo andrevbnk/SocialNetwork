@@ -22,6 +22,7 @@ node server.js
 ### Main page 
 ![image](https://user-images.githubusercontent.com/43111628/119261716-4b485780-bbe1-11eb-9ce6-11002f725dba.png)
 ![image](https://user-images.githubusercontent.com/43111628/119261794-a11cff80-bbe1-11eb-8475-11b6b55e99f1.png)
+![image](https://user-images.githubusercontent.com/43111628/119262448-f5c17a00-bbe3-11eb-825b-d669d1aa8f91.png)
 ![image](https://user-images.githubusercontent.com/43111628/119261797-a5e1b380-bbe1-11eb-857e-9ae1038ab178.png)
 
 
