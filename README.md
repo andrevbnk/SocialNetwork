@@ -19,17 +19,17 @@ node server.js
 
 ```
 
-### Main page ###:
+### Main page 
 ![image](https://user-images.githubusercontent.com/43111628/119261716-4b485780-bbe1-11eb-9ce6-11002f725dba.png)
 ![image](https://user-images.githubusercontent.com/43111628/119261794-a11cff80-bbe1-11eb-8475-11b6b55e99f1.png)
 ![image](https://user-images.githubusercontent.com/43111628/119261797-a5e1b380-bbe1-11eb-857e-9ae1038ab178.png)
 
 
-## Auth ##:
+## Auth:
 ![image](https://user-images.githubusercontent.com/43111628/119261815-babe4700-bbe1-11eb-970c-594e410cbd93.png)
 ![image](https://user-images.githubusercontent.com/43111628/119261821-c1e55500-bbe1-11eb-837a-39b80153a59a.png)
 
-## JS AUTH #:
+## JS AUTH ##:
 ![image](https://user-images.githubusercontent.com/43111628/119262215-14734100-bbe3-11eb-9b06-c369183b943e.png)
 ![image](https://user-images.githubusercontent.com/43111628/119261840-e4776e00-bbe1-11eb-844f-43f4708109e7.png)
 
@@ -37,13 +37,13 @@ node server.js
 ![image](https://user-images.githubusercontent.com/43111628/119262214-14734100-bbe3-11eb-9c21-16f4d18e53e6.png)
 
 
-CSS:
+## CSS/HTML ##:
 ![image](https://user-images.githubusercontent.com/43111628/119261851-ee00d600-bbe1-11eb-97d5-13fa1f04606d.png)
 
 
-## Profile ##:
+## Profile:
 ![image](https://user-images.githubusercontent.com/43111628/119261945-2d2f2700-bbe2-11eb-9e76-ee0ebcec377a.png)
-# Event Profile #:
+# Event Profile:
 ![image](https://user-images.githubusercontent.com/43111628/119262000-551e8a80-bbe2-11eb-92e4-3b81d221e743.png)
 
 ## User Mongoose Model:
