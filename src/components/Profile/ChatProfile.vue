@@ -1,5 +1,5 @@
 <template>
-  <div class="tab-pane fade" id="chat" role="tabpanel" aria-labelledby="chat-tab" >
+  <div class="tab-pane fade" id="chat" role="tabpanel" aria-labelledby="chat-tab">
     <div class="conversation-wrapper">
       <div class="conversation-content">
         <div
@@ -10,10 +10,9 @@
             class="conversation-inner"
             style="overflow: auto; width: auto; height: 340px"
           >
-            <div class="allMessages" v-for='message in messages' :key="message.id">
+            <div class="allMessages" v-for="message in messages" :key="message.id">
               <ChatMessage :message="message" />
             </div>
-
           </div>
           <div
             class="slimScrollBar"
@@ -99,14 +98,14 @@ export default {
           idProfile: this.idProfile,
         },
         (data) => {
-          this.messages = data?data.messages:null;
+          this.messages = data ? data.messages : null;
           console.log(this.messages);
         }
       );
       // this.downScroll();
     },
     loadMessage() {
-        //  this.downScroll();
+      //  this.downScroll();
       axios.get("/profile/loadMessage/" + this.idProfile).then((res) => {
         this.messages = res.data.messages;
       });
@@ -133,7 +132,4 @@ textarea.form-control {
   box-shadow: none;
   -webkit-box-shadow: none;
 }
-
-
-
 </style>

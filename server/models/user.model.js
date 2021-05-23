@@ -1,8 +1,5 @@
 const mongoose = require("mongoose");
-const uuidv4 = require('uuid/v4');
-const  UUID = mongoose.Types.UUID;
 
-require('mongoose-uuid2')(mongoose);
 const validateEmail = function(email) {
   const re = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
   return re.test(email)
@@ -21,33 +18,30 @@ const User = mongoose.model(
     data:{
       img:{type:String,default:"https://cdn3.iconfinder.com/data/icons/pixel-perfect-at-24px-volume-5/24/2097-512.png"},
       username: {type:String,trim: true,minlength: 2,maxlength: 15},
-      firstName:{type:String,trim: true,minlength: 0,maxlength: 15,default:'Андрей'},
-      lastName:{type:String,trim: true,minlength: 0,maxlength: 28,default:'Морозов'},
+      firstName:{type:String,trim: true,minlength: 0,maxlength: 15,default:'Болдак'},
+      lastName:{type:String,trim: true,minlength: 0,maxlength: 28,default:'<3'},
       dataCreated:{type:Date,default:Date.now},
-      about:{type:String,trim: true,minlength: 0,maxlength: 255,default:'Ищу работу'},
-      age:{type:String,trim: true,minlength: 0,maxlength: 50,default:'19'},
+      about:{type:String,trim: true,minlength: 0,maxlength: 255,default:'55'},
+      age:{type:String,trim: true,minlength: 0,maxlength: 50,default:'44'},
       birthday:{type:Date},
       phone:{type:String,
-      default:'0688668756'},
+      default:'0682281337'},
       messages:{type:Array,default:[
         {
-          message:'Нас заинтересовала ваше резюме, не хотите пройти собеседование в качестве Front-end/Fullstack developer?',
+          message:'Нас заинтересовала ваше резюме, не хотите пройти собеседование в качестве Front-end',
           side:false,
           date: curDate,
-          _id:{ type: UUID, default: uuidv4 }
         },
 
         {
           message:'Да, готов пройти собеседование в любое время',
           side:true,
           date:curDate,
-          _id:{ type: UUID, default: uuidv4 }
         },
         {
           message:'Отлично, приходите в XXX на 12:00',
           side:false,
           date:curDate,
-          _id:{ type: UUID, default: uuidv4 }
         },
   
       ]},

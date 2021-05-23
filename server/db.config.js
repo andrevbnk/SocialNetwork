@@ -1,5 +1,7 @@
 module.exports = {
-    HOST: "localhost",
-    PORT: 27017,
-    DB: "SocNet_db"
-  };
+  HOST: "mor_ozzy",
+  DB: "parser",
+  PASSWORD:'a4047946',
+  AUTHOR:'Спартак Македонский',
+  PORT:'1337'
+};

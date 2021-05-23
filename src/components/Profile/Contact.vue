@@ -11,7 +11,7 @@
         </div>
         <div class="details">
           <div class="name">
-            <a href="#">Андрей Морозов</a>
+            <a href="#">User Name</a>
           </div>
           <div class="time online"><i class="fa fa-check-circle"></i> Онлайн</div>
           <div class="type">
