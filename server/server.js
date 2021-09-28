@@ -20,6 +20,7 @@ const dbConfig = require('./db.config');
 const db = require("./models");
 const User = db.user;
 
+//~~~TEST~~~ Decomp on file
 const io = require('socket.io')(server,{
   cors: {
     origin: "http://localhost:8080",
@@ -66,7 +67,7 @@ io.on('connection', (socket) => {
   });
 
 });
-
+//~~~TEST~~~ Decomp on file
 db.mongoose
   .connect(`mongodb+srv://${dbConfig.HOST}:${dbConfig.PASSWORD}@cluster0.fmmbl.mongodb.net/${dbConfig.DB}?retryWrites=true&w=majority`, {
     useNewUrlParser: true,
@@ -80,7 +81,7 @@ db.mongoose
     console.error("Connection error", err);
     process.exit();
   });
-
+//~~~TEST~~~ Decomp on file
 let corsOptions = {
   origin: "http://localhost:8080",
   methods: ["GET","HEAD","PUT","PATCH","POST","DELETE"],
@@ -98,7 +99,7 @@ app.use(function(req, res, next) {
   res.set('Access-Control-Allow-Credentials', 'true');
   next();
 });
-
+//~~~TEST~~~ Decomp on file
 require('./routes/auth.routes')(app);
 require('./routes/user.routes')(app);
 require('./routes/profile.routes')(app);
